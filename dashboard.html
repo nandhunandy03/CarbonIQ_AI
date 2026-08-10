@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CarbonIQ AI Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#eef7f1;
+}
+
+/* HEADER */
+
+header{
+    background:#0f5132;
+    color:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    font-size:28px;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+}
+
+.logout{
+    background:#dc2626;
+    padding:10px 18px;
+    border-radius:8px;
+}
+
+/* CONTAINER */
+
+.container{
+    padding:40px;
+}
+
+/* WELCOME */
+
+.welcome{
+    margin-bottom:30px;
+}
+
+.welcome h1{
+    color:#0f5132;
+}
+
+.welcome p{
+    color:#555;
+    margin-top:8px;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.card h3{
+    color:#555;
+}
+
+.card h1{
+    color:#16a34a;
+    margin-top:10px;
+}
+
+/* PREDICT */
+
+.predict{
+    margin-top:40px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.predict h2{
+    color:#0f5132;
+    margin-bottom:10px;
+}
+
+.predict p{
+    margin-bottom:20px;
+    color:#666;
+}
+
+.predict button{
+    padding:15px 35px;
+    font-size:18px;
+    border:none;
+    background:#16a34a;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.predict button:hover{
+    background:#15803d;
+}
+
+/* GRAPHS */
+
+.analytics{
+    margin-top:40px;
+}
+
+.analytics h2{
+    text-align:center;
+    color:#0f5132;
+    margin-bottom:25px;
+}
+
+.chart-container{
+    background:white;
+    padding:25px;
+    margin-bottom:30px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.chart-container h3{
+    color:#0f5132;
+    margin-bottom:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:15px 20px;
+    }
+
+    nav{
+        gap:10px;
+    }
+
+    .container{
+        padding:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <h2>🌿 CarbonIQ AI</h2>
+
+    <nav>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('predict') }}">
+            Predict
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h1>
+            Welcome to CarbonIQ AI 🌱
+        </h1>
+
+        <p>
+            Textile Industry Carbon Emission Monitoring & Prediction
+        </p>
+
+    </div>
+
+
+    <!-- CARDS -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>
+                🌿 Total Predictions
+            </h3>
+
+            <h1>
+                {{ total_predictions }}
+            </h1>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                📊 Average Emission
+            </h3>
+
+            <h1>
+                {{ average_emission }}
+            </h1>
+
+            <p>kg CO₂</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🔥 Highest Emission
+            </h3>
+
+            <h1>
+                {{ highest_emission }}
+            </h1>
+
+            <p>kg CO₂</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🏭 Fabric Types
+            </h3>
+
+            <h1>
+                {{ fabric_count }}
+            </h1>
+
+        </div>
+
+    </div>
+
+
+    <!-- PREDICT -->
+
+    <div class="predict">
+
+        <h2>
+            Carbon Emission Prediction
+        </h2>
+
+        <p>
+            Enter textile production details and predict carbon emissions using Machine Learning.
+        </p>
+
+        <a href="{{ url_for('predict') }}">
+
+            <button>
+                🌱 Start Prediction
+            </button>
+
+        </a>
+
+    </div>
+
+
+    <!-- ANALYTICS -->
+
+    <div class="analytics">
+
+        <h2>
+            📊 Carbon Emission Analytics
+        </h2>
+
+
+        <!-- FABRIC GRAPH -->
+
+        <div class="chart-container">
+
+            <h3>
+                Carbon Emission by Fabric Type
+            </h3>
+
+            <canvas id="fabricChart"></canvas>
+
+        </div>
+
+
+        <!-- PRODUCTION GRAPH -->
+
+        <div class="chart-container">
+
+            <h3>
+                Production vs Carbon Emission
+            </h3>
+
+            <canvas id="productionChart"></canvas>
+
+        </div>
+
+
+        <!-- ELECTRICITY GRAPH -->
+
+        <div class="chart-container">
+
+            <h3>
+                Electricity vs Carbon Emission
+            </h3>
+
+            <canvas id="electricityChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GRAPH JAVASCRIPT -->
+<script>
+window.onload = function () {
+
+    new Chart(document.getElementById("fabricChart"), {
+        type: "bar",
+
+        data: {
+            labels: ["Cotton", "Polyester", "Silk", "Wool"],
+
+            datasets: [{
+                label: "Carbon Emission",
+                data: [120, 250, 180, 90]
+            }]
+        },
+
+        options: {
+            responsive: true
+        }
+    });
+
+
+    new Chart(document.getElementById("productionChart"), {
+        type: "line",
+
+        data: {
+            labels: [100, 200, 300, 400, 500],
+
+            datasets: [{
+                label: "Carbon Emission",
+                data: [80, 150, 220, 300, 380]
+            }]
+        },
+
+        options: {
+            responsive: true
+        }
+    });
+
+
+    new Chart(document.getElementById("electricityChart"), {
+        type: "line",
+
+        data: {
+            labels: [1000, 2000, 3000, 4000, 5000],
+
+            datasets: [{
+                label: "Carbon Emission",
+                data: [100, 180, 260, 350, 450]
+            }]
+        },
+
+        options: {
+            responsive: true
+        }
+    });
+
+};
+</script>
+</body>
+</html>
