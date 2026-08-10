@@ -1,0 +1,7 @@
+electricity,fuel,water,production,machine_hours,fabric,carbon_emission
+1450,175,8600,570,11,Polyester,380
+2000,250,12000,800,18,Cotton,600
+2200,280,14000,900,20,Polyester,680
+2500,320,16000,1000,22,Silk,750
+2800,350,18000,1200,24,Wool,820
+3000,400,20000,1500,28,Polyester,900
