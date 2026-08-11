@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 import sqlite3
 import pickle
 import pandas as pd
@@ -330,6 +330,28 @@ def result():
 
         highest_percentage=highest_percentage
     )
+    @app.route("/check_alert", methods=["POST"])
+def check_alert():
+
+    electricity = float(request.form["electricity"])
+    fuel = float(request.form["fuel"])
+    water = float(request.form["water"])
+    production = float(request.form["production"])
+    machine_hours = float(request.form["machine_hours"])
+    fabric = request.form["fabric"]
+
+    fabric_number = encoder.transform([fabric])[0]
+
+    prediction = model.predict([[
+        electricity, fuel, water, production, machine_hours, fabric_number
+    ]])[0]
+
+    prediction = round(float(prediction), 2)
+
+    if prediction > 450:
+        return jsonify({"alert": True, "message": f"⚠️ HIGH CARBON EMISSION ALERT!\nPredicted: {prediction} kg CO2"})
+    else:
+        return jsonify({"alert": False})
 # ---------- RUN ----------
 
 if __name__ == "__main__":
