@@ -171,8 +171,15 @@ document.getElementById("predictForm").addEventListener("submit", function(e) {
     });
 });
 </script>
+<audio id="alertSound" src="/static/sounds/alert.mp3" preload="auto"></audio>
 
+<script>
+function playAlertSound() {
+const sound = document.getElementById("alertSound");
+sound.play();
+}
+
+</script>
 
 </body>
-</html>
 </html>
