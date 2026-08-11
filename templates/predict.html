@@ -89,10 +89,9 @@ font-weight:bold;
 
 <div class="container">
 
-<h1>🌿 Carbon Emission Prediction</h1>
+<h1>🌿 Carbon Emission </h1>
 
-<form action="/result" method="POST">
-
+<form id="predictForm" action="/result" method="POST">
 <div class="input-group">
 <label>Electricity Consumption (kWh)</label>
 <input type="number" name="electricity" required>
@@ -153,4 +152,24 @@ Predict Carbon Emission
 </div>
 
 </body>
+<script>
+document.getElementById("predictForm").addEventListener("submit", function(e) {
+
+    let formData = new FormData(this);
+
+    fetch("/check_alert", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.alert) {
+            alert(data.message);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
 </html>
