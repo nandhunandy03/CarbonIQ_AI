@@ -330,7 +330,7 @@ def result():
 
         highest_percentage=highest_percentage
     )
-    @app.route("/check_alert", methods=["POST"])
+@app.route("/check_alert", methods=["POST"])
 def check_alert():
 
     electricity = float(request.form["electricity"])
