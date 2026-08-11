@@ -150,10 +150,10 @@ Predict Carbon Emission
 </div>
 
 </div>
-
-</body>
 <script>
 document.getElementById("predictForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();   // <-- IDHA ADD PANNUNGA - page navigate aagаmал் நிறுத்தும்
 
     let formData = new FormData(this);
 
@@ -166,9 +166,12 @@ document.getElementById("predictForm").addEventListener("submit", function(e) {
         if (data.alert) {
             alert(data.message);
         }
+        // Popup kaattina piragு (illa illama), form-a manual-a submit pannunga
+        e.target.submit();
     });
 });
 </script>
+
 
 </body>
 </html>
