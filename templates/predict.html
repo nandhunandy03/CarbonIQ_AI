@@ -165,7 +165,7 @@ document.getElementById("predictForm").addEventListener("submit", function(e) {
     .then(data => {
         if (data.alert) {
          const sound = document.getElementById("alertSound");
-        sound.play();
+        sound.play().catch(err => console.log(err));
 
         setTimeout(() => {
         alert(data.message);
