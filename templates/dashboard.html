@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CarbonIQ AI - Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#f6faf8;
+    color:#17251f;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:265px;
+    height:100vh;
+
+    background:#075b43;
+
+    color:white;
+
+    padding:25px 12px;
+
+    z-index:1000;
+
+    box-shadow:4px 0 18px rgba(0,0,0,.06);
+}
+
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 15px;
+
+    margin-bottom:35px;
+}
+
+
+.logo-circle{
+
+    width:44px;
+    height:44px;
+
+    border-radius:10px;
+
+    background:#16a96d;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:23px;
+}
+
+
+.logo-text{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    line-height:1.2;
+}
+
+
+.logo-text span{
+
+    display:block;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-top:4px;
+
+    opacity:.9;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.nav-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:13px 17px;
+
+    border-radius:9px;
+
+    color:#e5f2ed;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+
+.nav-item:hover{
+
+    background:#087353;
+}
+
+
+.nav-item.active{
+
+    background:#16a96d;
+
+    color:white;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.10);
+}
+
+
+.nav-icon{
+
+    width:23px;
+
+    text-align:center;
+
+    font-size:19px;
+}
+
+
+/* LOGOUT */
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    bottom:22px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:265px;
+
+    min-height:100vh;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    height:78px;
+
+    background:white;
+
+    border-bottom:1px solid #e7eeea;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+}
+
+
+.page-title{
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#1c2c25;
+}
+
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box{
+
+    width:255px;
+
+    height:40px;
+
+    border-radius:22px;
+
+    background:#f3f7f5;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:0 16px;
+}
+
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:12px;
+
+    color:#34443c;
+}
+
+
+.search-icon{
+
+    font-size:19px;
+
+    color:#7c8b84;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification{
+
+    position:relative;
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:#293a32;
+}
+
+
+.notification-icon{
+
+    font-size:21px;
+}
+
+
+.notification-badge{
+
+    position:absolute;
+
+    top:-3px;
+
+    right:-4px;
+
+    min-width:18px;
+
+    height:18px;
+
+    padding:0 4px;
+
+    border-radius:50%;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+/* =====================================================
+   USER PROFILE
+===================================================== */
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+}
+
+
+.user-image{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#e1ebe6;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#075b43;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+
+.user-info strong{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#27372f;
+}
+
+
+.user-info span{
+
+    display:block;
+
+    font-size:11px;
+
+    color:#8a9791;
+
+    margin-top:3px;
+}
+
+
+.arrow{
+
+    color:#6e7c75;
+
+    font-size:10px;
+
+    margin-left:5px;
+}
+
+
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
+
+.notification-panel{
+
+    position:fixed;
+
+    top:70px;
+
+    right:105px;
+
+    width:315px;
+
+    background:white;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+
+    border:1px solid #e5ebe8;
+
+    padding:18px;
+
+    display:none;
+
+    z-index:2000;
+}
+
+
+.notification-panel.show{
+
+    display:block;
+}
+
+
+.notification-panel h3{
+
+    font-size:15px;
+
+    margin-bottom:14px;
+
+    color:#18372a;
+}
+
+
+.notification-message{
+
+    padding:13px;
+
+    border-radius:9px;
+
+    background:#fff4f4;
+
+    color:#b42323;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+
+.notification-safe{
+
+    padding:13px;
+
+    border-radius:9px;
+
+    background:#effaf4;
+
+    color:#15803d;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+
+    padding:25px 35px 40px;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome{
+
+    min-height:110px;
+
+    border-radius:15px;
+
+    background:#effaf4;
+
+    border:1px solid #dcefe4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:20px 35px;
+
+    margin-bottom:20px;
+}
+
+
+.welcome h1{
+
+    color:#115b42;
+
+    font-size:21px;
+
+    margin-bottom:8px;
+}
+
+
+.welcome p{
+
+    color:#718078;
+
+    font-size:13px;
+}
+
+
+.welcome-symbol{
+
+    width:82px;
+    height:82px;
+
+    border-radius:50%;
+
+    background:#d9f2e4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#087353;
+
+    font-size:35px;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:18px;
+
+    margin-bottom:20px;
+}
+
+
+.stat-card{
+
+    background:white;
+
+    border:1px solid #e8efeb;
+
+    border-radius:13px;
+
+    min-height:145px;
+
+    padding:20px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.stat-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+
+.stat-icon{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:19px;
+
+    font-weight:600;
+}
+
+
+.green-icon{
+
+    background:#e2f7eb;
+
+    color:#12915d;
+}
+
+
+.blue-icon{
+
+    background:#e2f1fa;
+
+    color:#1785bd;
+}
+
+
+.orange-icon{
+
+    background:#fff0dc;
+
+    color:#e99624;
+}
+
+
+.stat-title{
+
+    font-size:13px;
+
+    color:#68766f;
+
+    font-weight:600;
+}
+
+
+.stat-number{
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#1e2c26;
+
+    margin-top:6px;
+}
+
+
+.stat-number span{
+
+    font-size:12px;
+
+    font-weight:500;
+
+    color:#68756f;
+}
+
+
+.stat-bottom{
+
+    margin-top:15px;
+
+    color:#20a064;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+
+.good{
+
+    display:inline-block;
+
+    background:#dcf5e7;
+
+    color:#15965b;
+
+    padding:4px 10px;
+
+    border-radius:12px;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   CHARTS
+===================================================== */
+
+.chart-grid{
+
+    display:grid;
+
+    grid-template-columns:1.25fr 1fr;
+
+    gap:18px;
+
+    margin-bottom:20px;
+}
+
+
+.chart-card{
+
+    background:white;
+
+    border:1px solid #e8efeb;
+
+    border-radius:13px;
+
+    padding:22px;
+
+    min-height:360px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.chart-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+
+.chart-header h2{
+
+    font-size:16px;
+
+    color:#25342c;
+}
+
+
+.chart-select{
+
+    border:1px solid #e4eae7;
+
+    background:white;
+
+    padding:8px 13px;
+
+    border-radius:8px;
+
+    font-size:11px;
+
+    color:#53625a;
+
+    outline:none;
+}
+
+
+.chart-container{
+
+    height:280px;
+
+    position:relative;
+}
+
+
+/* =====================================================
+   DONUT
+===================================================== */
+
+.donut-layout{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:35px;
+
+    height:280px;
+}
+
+
+.donut-container{
+
+    width:220px;
+
+    height:220px;
+}
+
+
+.legend{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+
+.legend-item{
+
+    display:grid;
+
+    grid-template-columns:12px 90px 40px;
+
+    align-items:center;
+
+    gap:7px;
+
+    font-size:11px;
+}
+
+
+.legend-dot{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+}
+
+
+.electricity{
+    background:#168dcc;
+}
+
+
+.fuel{
+    background:#22a65d;
+}
+
+
+.water{
+    background:#b8c0c5;
+}
+
+
+.others{
+    background:#0b8b53;
+}
+
+
+.legend-percent{
+
+    text-align:right;
+
+    font-weight:600;
+}
+
+
+/* =====================================================
+   ABOUT US
+===================================================== */
+
+.about-card{
+
+    background:white;
+
+    border:1px solid #e5ece8;
+
+    border-radius:13px;
+
+    padding:28px;
+
+    display:flex;
+
+    gap:25px;
+
+    align-items:flex-start;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.about-icon{
+
+    width:65px;
+    height:65px;
+
+    flex-shrink:0;
+
+    border-radius:14px;
+
+    background:#e1f5e9;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+}
+
+
+.about-content{
+
+    flex:1;
+}
+
+
+.about-content h2{
+
+    color:#075b43;
+
+    font-size:19px;
+
+    margin-bottom:10px;
+}
+
+
+.about-content p{
+
+    color:#68766f;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    margin-bottom:8px;
+
+    max-width:900px;
+}
+
+
+.about-features{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:18px;
+}
+
+
+.about-features div{
+
+    background:#f4faf7;
+
+    padding:14px;
+
+    border-radius:9px;
+
+    border:1px solid #e8f0eb;
+}
+
+
+.about-features strong{
+
+    display:block;
+
+    color:#075b43;
+
+    font-size:12px;
+
+    margin-bottom:6px;
+}
+
+
+.about-features span{
+
+    color:#7b8882;
+
+    font-size:11px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:1100px){
+
+    .sidebar{
+
+        width:220px;
+    }
+
+    .main{
+
+        margin-left:220px;
+    }
+
+    .stats{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .chart-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:750px){
+
+    .sidebar{
+
+        width:70px;
+
+        padding:20px 8px;
+    }
+
+    .logo{
+
+        justify-content:center;
+
+        padding:0;
+    }
+
+    .logo-text{
+
+        display:none;
+    }
+
+    .nav-item{
+
+        justify-content:center;
+
+        padding:13px;
+    }
+
+    .nav-item span:not(.nav-icon){
+
+        display:none;
+    }
+
+    .main{
+
+        margin-left:70px;
+    }
+
+    .topbar{
+
+        padding:0 15px;
+    }
+
+    .page-title{
+
+        font-size:19px;
+    }
+
+    .search-box{
+
+        display:none;
+    }
+
+    .user-info,
+    .arrow{
+
+        display:none;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .stats{
+
+        grid-template-columns:1fr;
+    }
+
+    .welcome{
+
+        padding:20px;
+    }
+
+    .welcome-symbol{
+
+        display:none;
+    }
+
+    .donut-layout{
+
+        flex-direction:column;
+
+        height:auto;
+
+        padding-top:10px;
+    }
+
+    .notification-panel{
+
+        right:15px;
+
+        width:280px;
+    }
+
+    .about-card{
+
+        flex-direction:column;
+    }
+
+    .about-features{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🌿
+        </div>
+
+        <div class="logo-text">
+
+            Carbon
+
+            <span>
+                Emission Predictor
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <nav class="nav-menu">
+
+
+        <!-- DASHBOARD -->
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item active">
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- PREDICTION -->
+
+        <a href="{{ url_for('predict') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                □
+            </span>
+
+            <span>
+                Prediction
+            </span>
+
+        </a>
+
+
+        <!-- HISTORY -->
+
+        <a href="{{ url_for('history') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ◷
+            </span>
+
+            <span>
+                History
+            </span>
+
+        </a>
+
+
+        <!-- REPORTS -->
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ▤
+            </span>
+
+            <span>
+                Reports
+            </span>
+
+        </a>
+
+
+        <!-- ABOUT US -->
+
+        <a href="#about"
+           class="nav-item">
+
+            <span class="nav-icon">
+                i
+            </span>
+
+            <span>
+                About Us
+            </span>
+
+        </a>
+
+
+        <!-- SETTINGS -->
+
+        <a href="#settings"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- LOGOUT -->
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⇥
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         TOP BAR
+    ================================================= -->
+
+    <header class="topbar">
+
+
+        <h1 class="page-title">
+            Dashboard
+        </h1>
+
+
+        <div class="top-right">
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search here..."
+                >
+
+            </div>
+
+
+            <!-- NOTIFICATION -->
+
+            <div class="notification"
+                 onclick="toggleNotifications()">
+
+                <span class="notification-icon">
+                    ♧
+                </span>
+
+                <span class="notification-badge">
+
+                    {{ alert_count | default(0) }}
+
+                </span>
+
+            </div>
+
+
+            <!-- USER -->
+
+            <div class="user-profile">
+
+
+                <div class="user-image">
+
+                    TF
+
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong>
+
+                        {{ username |
+                           default("Textile Factory") }}
+
+                    </strong>
+
+                    <span>
+
+                        TXT001
+
+                    </span>
+
+                </div>
+
+
+                <span class="arrow">
+                    ▼
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         NOTIFICATION PANEL
+    ================================================= -->
+
+    <div id="notificationPanel"
+         class="notification-panel">
+
+
+        <h3>
+            Notifications
+        </h3>
+
+
+        {% if alert_count|default(0) > 0 %}
+
+        <div class="notification-message">
+
+            <strong>
+                HIGH CARBON ALERT
+            </strong>
+
+            <br><br>
+
+            High carbon emission detected.
+
+            <br>
+
+            Please check your latest prediction.
+
+        </div>
+
+        {% else %}
+
+        <div class="notification-safe">
+
+            No new alerts.
+
+            <br>
+
+            Your emission level is within
+            the current limit.
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <div class="content">
+
+
+        <!-- =================================================
+             WELCOME
+        ================================================= -->
+
+        <section class="welcome">
+
+
+            <div>
+
+                <h1>
+
+                    Welcome back,
+                    {{ username |
+                       default("Textile Factory") }}!
+
+                </h1>
+
+
+                <p>
+
+                    Here's your factory overview
+                    and carbon insights.
+
+                </p>
+
+            </div>
+
+
+            <div class="welcome-symbol">
+
+                🌿
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================= -->
+
+        <section class="stats">
+
+
+            <!-- TOTAL PREDICTIONS -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-header">
+
+
+                    <div class="stat-icon green-icon">
+
+                        ◉
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="stat-title">
+
+                            Total Predictions
+
+                        </div>
+
+
+                        <div class="stat-number">
+
+                            {{ total_predictions |
+                               default(128) }}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="stat-bottom">
+
+                    +12 this month
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TOTAL CO2 -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-header">
+
+
+                    <div class="stat-icon green-icon">
+
+                        🌿
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="stat-title">
+
+                            Total CO₂ Emission
+
+                        </div>
+
+
+                        <div class="stat-number">
+
+                            {{ total_emission |
+                               default("12,450") }}
+
+                            <span>
+                                kg
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="stat-bottom">
+
+                    +8.5% this month
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- CARBON SCORE -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-header">
+
+
+                    <div class="stat-icon orange-icon">
+
+                        %
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="stat-title">
+
+                            Carbon Score
+
+                        </div>
+
+
+                        <div class="stat-number">
+
+                            {{ carbon_score |
+                               default(78) }}
+
+                            <span>
+                                /100
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="stat-bottom">
+
+                    <span class="good">
+
+                        Good
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ENERGY -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-header">
+
+
+                    <div class="stat-icon orange-icon">
+
+                        +
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="stat-title">
+
+                            Energy Optimized
+
+                        </div>
+
+
+                        <div class="stat-number">
+
+                            {{ energy_optimized |
+                               default("15.6") }}%
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="stat-bottom">
+
+                    +3.2% this month
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CHARTS
+        ================================================= -->
+
+        <section class="chart-grid">
+
+
+            <!-- CO2 TREND -->
+
+            <div class="chart-card">
+
+
+                <div class="chart-header">
+
+
+                    <h2>
+                        CO₂ Emission Trend
+                    </h2>
+
+
+                    <select class="chart-select">
+
+                        <option>
+                            This Month
+                        </option>
+
+                        <option>
+                            Last Month
+                        </option>
+
+                        <option>
+                            This Year
+                        </option>
+
+                    </select>
+
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas id="emissionChart"></canvas>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- EMISSION SOURCE -->
+
+            <div class="chart-card">
+
+
+                <div class="chart-header">
+
+
+                    <h2>
+                        Emission by Source
+                    </h2>
+
+
+                </div>
+
+
+                <div class="donut-layout">
+
+
+                    <div class="donut-container">
+
+                        <canvas id="sourceChart"></canvas>
+
+                    </div>
+
+
+                    <div class="legend">
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot electricity"></span>
+
+                            <span>
+                                Electricity
+                            </span>
+
+                            <span class="legend-percent">
+                                40%
+                            </span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot fuel"></span>
+
+                            <span>
+                                Fuel
+                            </span>
+
+                            <span class="legend-percent">
+                                30%
+                            </span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot water"></span>
+
+                            <span>
+                                Water
+                            </span>
+
+                            <span class="legend-percent">
+                                20%
+                            </span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot others"></span>
+
+                            <span>
+                                Others
+                            </span>
+
+                            <span class="legend-percent">
+                                10%
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             ABOUT US
+        ================================================= -->
+
+        <section id="about"
+                 class="about-card">
+
+
+            <div class="about-icon">
+
+                🌿
+
+            </div>
+
+
+            <div class="about-content">
+
+
+                <h2>
+                    About CarbonIQ AI
+                </h2>
+
+
+                <p>
+
+                    CarbonIQ AI is a smart carbon emission
+                    prediction platform designed to help
+                    textile industries monitor, understand
+                    and reduce their carbon footprint.
+
+                </p>
+
+
+                <p>
+
+                    The system uses machine learning to
+                    predict carbon emissions based on
+                    electricity, fuel, water, production
+                    and machine usage.
+
+                </p>
+
+
+                <div class="about-features">
+
+
+                    <div>
+
+                        <strong>
+                            🌿 Smart Prediction
+                        </strong>
+
+                        <span>
+                            AI-based carbon emission
+                            prediction.
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            ⚡ Resource Monitoring
+                        </strong>
+
+                        <span>
+                            Track major emission sources
+                            and resource usage.
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            🚨 Smart Alerts
+                        </strong>
+
+                        <span>
+                            Get notified when emissions
+                            are above the safe limit.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+function toggleNotifications(){
+
+    const panel =
+        document.getElementById(
+            "notificationPanel"
+        );
+
+    panel.classList.toggle("show");
+
+}
+
+
+/* =====================================================
+   CLOSE NOTIFICATION
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const panel =
+            document.getElementById(
+                "notificationPanel"
+            );
+
+        const notification =
+            document.querySelector(
+                ".notification"
+            );
+
+
+        if(
+
+            panel.classList.contains("show") &&
+
+            !panel.contains(event.target) &&
+
+            !notification.contains(event.target)
+
+        ){
+
+            panel.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CO2 LINE CHART
+===================================================== */
+
+const emissionCanvas =
+    document.getElementById(
+        "emissionChart"
+    );
+
+
+new Chart(
+
+    emissionCanvas,
+
+    {
+
+        type:"line",
+
+        data:{
+
+            labels:[
+
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun"
+
+            ],
+
+            datasets:[
+
+                {
+
+                    label:"CO₂ Emission",
+
+                    data:[
+
+                        30,
+                        100,
+                        92,
+                        160,
+                        145,
+                        80
+
+                    ],
+
+                    borderColor:"#159b58",
+
+                    backgroundColor:
+                        "rgba(21,155,88,0.08)",
+
+                    borderWidth:3,
+
+                    pointRadius:4,
+
+                    pointBackgroundColor:
+                        "#159b58",
+
+                    pointBorderColor:
+                        "#ffffff",
+
+                    pointBorderWidth:2,
+
+                    tension:.4,
+
+                    fill:true
+
+                }
+
+            ]
+
+        },
+
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+
+                    display:false
+
+                }
+
+            },
+
+
+            scales:{
+
+                y:{
+
+                    beginAtZero:true,
+
+                    grid:{
+
+                        color:"#edf1ef"
+
+                    },
+
+                    ticks:{
+
+                        font:{
+
+                            size:10
+
+                        }
+
+                    },
+
+                    title:{
+
+                        display:true,
+
+                        text:"kg CO₂"
+
+                    }
+
+                },
+
+
+                x:{
+
+                    grid:{
+
+                        color:"#f2f5f3"
+
+                    },
+
+                    ticks:{
+
+                        font:{
+
+                            size:10
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+
+/* =====================================================
+   EMISSION SOURCE DONUT
+===================================================== */
+
+const sourceCanvas =
+    document.getElementById(
+        "sourceChart"
+    );
+
+
+new Chart(
+
+    sourceCanvas,
+
+    {
+
+        type:"doughnut",
+
+        data:{
+
+            labels:[
+
+                "Electricity",
+                "Fuel",
+                "Water",
+                "Others"
+
+            ],
+
+            datasets:[
+
+                {
+
+                    data:[
+
+                        40,
+                        30,
+                        20,
+                        10
+
+                    ],
+
+                    backgroundColor:[
+
+                        "#168dcc",
+                        "#22a65d",
+                        "#b8c0c5",
+                        "#0b8b53"
+
+                    ],
+
+                    borderWidth:0,
+
+                    cutout:"65%"
+
+                }
+
+            ]
+
+        },
+
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+
+                    display:false
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
