@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CarbonIQ AI - Reports</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#f6faf8;
+    color:#17251f;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =====================================================
+   SIDEBAR - SAME AS DASHBOARD
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:265px;
+    height:100vh;
+
+    background:#075b43;
+
+    color:white;
+
+    padding:25px 12px;
+
+    z-index:1000;
+
+    box-shadow:4px 0 18px rgba(0,0,0,.06);
+}
+
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 15px;
+
+    margin-bottom:35px;
+}
+
+
+.logo-circle{
+
+    width:44px;
+    height:44px;
+
+    border-radius:10px;
+
+    background:#16a96d;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:23px;
+}
+
+
+.logo-text{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    line-height:1.2;
+}
+
+
+.logo-text span{
+
+    display:block;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-top:4px;
+
+    opacity:.9;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.nav-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:13px 17px;
+
+    border-radius:9px;
+
+    color:#e5f2ed;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+
+.nav-item:hover{
+
+    background:#087353;
+}
+
+
+.nav-item.active{
+
+    background:#16a96d;
+
+    color:white;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.10);
+}
+
+
+.nav-icon{
+
+    width:23px;
+
+    text-align:center;
+
+    font-size:19px;
+}
+
+
+/* LOGOUT */
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    bottom:22px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:265px;
+
+    min-height:100vh;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    height:78px;
+
+    background:white;
+
+    border-bottom:1px solid #e7eeea;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+}
+
+
+.page-title{
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#1c2c25;
+}
+
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+
+/* SEARCH */
+
+.search-box{
+
+    width:255px;
+
+    height:40px;
+
+    border-radius:22px;
+
+    background:#f3f7f5;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:0 16px;
+}
+
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:12px;
+
+    color:#34443c;
+}
+
+
+.search-icon{
+
+    font-size:19px;
+
+    color:#7c8b84;
+}
+
+
+/* NOTIFICATION */
+
+.notification{
+
+    position:relative;
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:#293a32;
+}
+
+
+.notification-icon{
+
+    font-size:21px;
+}
+
+
+.notification-badge{
+
+    position:absolute;
+
+    top:-3px;
+
+    right:-4px;
+
+    min-width:18px;
+
+    height:18px;
+
+    padding:0 4px;
+
+    border-radius:50%;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+/* USER */
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+}
+
+
+.user-image{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#e1ebe6;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#075b43;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+
+.user-info strong{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#27372f;
+}
+
+
+.user-info span{
+
+    display:block;
+
+    font-size:11px;
+
+    color:#8a9791;
+
+    margin-top:3px;
+}
+
+
+.arrow{
+
+    color:#6e7c75;
+
+    font-size:10px;
+
+    margin-left:5px;
+}
+
+
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
+
+.notification-panel{
+
+    position:fixed;
+
+    top:70px;
+
+    right:105px;
+
+    width:315px;
+
+    background:white;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+
+    border:1px solid #e5ebe8;
+
+    padding:18px;
+
+    display:none;
+
+    z-index:2000;
+}
+
+
+.notification-panel.show{
+
+    display:block;
+}
+
+
+.notification-panel h3{
+
+    font-size:15px;
+
+    margin-bottom:14px;
+
+    color:#18372a;
+}
+
+
+.notification-message{
+
+    padding:13px;
+
+    border-radius:9px;
+
+    background:#fff4f4;
+
+    color:#b42323;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+
+.notification-safe{
+
+    padding:13px;
+
+    border-radius:9px;
+
+    background:#effaf4;
+
+    color:#15803d;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+
+    padding:25px 35px 40px;
+}
+
+
+/* =====================================================
+   REPORT HEADER
+===================================================== */
+
+.report-header{
+
+    min-height:110px;
+
+    border-radius:15px;
+
+    background:#effaf4;
+
+    border:1px solid #dcefe4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:20px 35px;
+
+    margin-bottom:20px;
+}
+
+
+.report-header h1{
+
+    color:#115b42;
+
+    font-size:21px;
+
+    margin-bottom:8px;
+}
+
+
+.report-header p{
+
+    color:#718078;
+
+    font-size:13px;
+}
+
+
+.report-symbol{
+
+    width:82px;
+    height:82px;
+
+    border-radius:50%;
+
+    background:#d9f2e4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#087353;
+
+    font-size:35px;
+}
+
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    margin-bottom:20px;
+}
+
+
+.card{
+
+    background:white;
+
+    border:1px solid #e8efeb;
+
+    border-radius:13px;
+
+    min-height:145px;
+
+    padding:20px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.card-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+
+.card-icon{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:19px;
+
+    background:#e2f7eb;
+
+    color:#12915d;
+}
+
+
+.card-title{
+
+    font-size:13px;
+
+    color:#68766f;
+
+    font-weight:600;
+}
+
+
+.card-number{
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#1e2c26;
+
+    margin-top:6px;
+}
+
+
+.card-number span{
+
+    font-size:12px;
+
+    font-weight:500;
+
+    color:#68756f;
+}
+
+
+.card-bottom{
+
+    margin-top:15px;
+
+    color:#20a064;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+
+/* =====================================================
+   REPORT GRID
+===================================================== */
+
+.report-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+    margin-bottom:20px;
+}
+
+
+.report-box{
+
+    background:white;
+
+    border:1px solid #e8efeb;
+
+    border-radius:13px;
+
+    padding:22px;
+
+    min-height:300px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.report-box h2{
+
+    font-size:16px;
+
+    color:#25342c;
+
+    margin-bottom:22px;
+}
+
+
+/* =====================================================
+   FABRIC
+===================================================== */
+
+.fabric-row{
+
+    margin-bottom:20px;
+}
+
+
+.fabric-name{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:7px;
+
+    font-size:12px;
+
+    color:#4c5b54;
+}
+
+
+.bar{
+
+    height:14px;
+
+    background:#e4eeee;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+
+.bar-fill{
+
+    height:100%;
+
+    background:#35a7c8;
+
+    border-radius:20px;
+}
+
+
+/* =====================================================
+   RESOURCE
+===================================================== */
+
+.resource-item{
+
+    margin-bottom:22px;
+}
+
+
+.resource-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:7px;
+
+    font-size:12px;
+
+    color:#4c5b54;
+}
+
+
+.resource-bar{
+
+    height:14px;
+
+    background:#e6eeee;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+
+.resource-fill{
+
+    height:100%;
+
+    background:#3d9b76;
+
+    border-radius:20px;
+}
+
+
+/* =====================================================
+   NOTIFICATION MOBILE
+===================================================== */
+
+@media(max-width:1100px){
+
+    .sidebar{
+
+        width:220px;
+    }
+
+    .main{
+
+        margin-left:220px;
+    }
+
+    .cards{
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .report-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:750px){
+
+    .sidebar{
+
+        width:70px;
+
+        padding:20px 8px;
+    }
+
+    .logo{
+
+        justify-content:center;
+
+        padding:0;
+    }
+
+    .logo-text{
+
+        display:none;
+    }
+
+    .nav-item{
+
+        justify-content:center;
+
+        padding:13px;
+    }
+
+    .nav-item span:not(.nav-icon){
+
+        display:none;
+    }
+
+    .main{
+
+        margin-left:70px;
+    }
+
+    .topbar{
+
+        padding:0 15px;
+    }
+
+    .search-box{
+
+        display:none;
+    }
+
+    .user-info,
+    .arrow{
+
+        display:none;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+    }
+
+    .report-header{
+
+        padding:20px;
+    }
+
+    .report-symbol{
+
+        display:none;
+    }
+
+    .notification-panel{
+
+        right:15px;
+
+        width:280px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- SAME LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🌿
+        </div>
+
+        <div class="logo-text">
+
+            Carbon
+
+            <span>
+                Emission Predictor
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- SAME MENU -->
+
+    <nav class="nav-menu">
+
+
+        <!-- DASHBOARD -->
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- PREDICTION -->
+
+        <a href="{{ url_for('predict') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                □
+            </span>
+
+            <span>
+                Prediction
+            </span>
+
+        </a>
+
+
+        <!-- HISTORY -->
+
+        <a href="{{ url_for('history') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ◷
+            </span>
+
+            <span>
+                History
+            </span>
+
+        </a>
+
+
+        <!-- REPORTS = ACTIVE -->
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item active">
+
+            <span class="nav-icon">
+                ▤
+            </span>
+
+            <span>
+                Reports
+            </span>
+
+        </a>
+
+
+        <!-- ABOUT US -->
+
+        <a href="{{ url_for('about') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                i
+            </span>
+
+            <span>
+                About Us
+            </span>
+
+        </a>
+
+
+        <!-- SETTINGS -->
+
+        <a href="#settings"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- LOGOUT -->
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⇥
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         TOP BAR
+    ================================================= -->
+
+    <header class="topbar">
+
+
+        <h1 class="page-title">
+            Reports
+        </h1>
+
+
+        <div class="top-right">
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search here..."
+                >
+
+            </div>
+
+
+            <!-- NOTIFICATION -->
+
+            <div class="notification"
+                 onclick="toggleNotifications()">
+
+                <span class="notification-icon">
+                    ♧
+                </span>
+
+                <span class="notification-badge">
+
+                    {{ alert_count | default(0) }}
+
+                </span>
+
+            </div>
+
+
+            <!-- USER PROFILE -->
+
+            <div class="user-profile">
+
+
+                <div class="user-image">
+
+                    TF
+
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong>
+
+                        {{ username |
+                           default("Textile Factory") }}
+
+                    </strong>
+
+                    <span>
+                        TXT001
+                    </span>
+
+                </div>
+
+
+                <span class="arrow">
+                    ▼
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         NOTIFICATION PANEL
+    ================================================= -->
+
+    <div id="notificationPanel"
+         class="notification-panel">
+
+
+        <h3>
+            Notifications
+        </h3>
+
+
+        {% if alert_count|default(0) > 0 %}
+
+        <div class="notification-message">
+
+            <strong>
+                HIGH CARBON ALERT
+            </strong>
+
+            <br><br>
+
+            High carbon emission detected.
+
+            <br>
+
+            Please check your latest prediction.
+
+        </div>
+
+        {% else %}
+
+        <div class="notification-safe">
+
+            No new alerts.
+
+            <br>
+
+            Your emission level is within
+            the current limit.
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <div class="content">
+
+
+        <!-- REPORT HEADER -->
+
+        <section class="report-header">
+
+
+            <div>
+
+                <h1>
+                    Carbon Emission Reports
+                </h1>
+
+
+                <p>
+
+                    Overall carbon emission performance,
+                    resource consumption and prediction summary.
+
+                </p>
+
+            </div>
+
+
+            <div class="report-symbol">
+
+                🌿
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             SUMMARY CARDS
+        ================================================= -->
+
+        <section class="cards">
+
+
+            <!-- TOTAL PREDICTIONS -->
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <div class="card-title">
+                            Total Predictions
+                        </div>
+
+                        <div class="card-number">
+                            {{ total_predictions }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-bottom">
+                    Prediction records
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL EMISSION -->
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <div class="card-title">
+                            Total Emission
+                        </div>
+
+                        <div class="card-number">
+
+                            {{ total_emission }}
+
+                            <span>
+                                kg
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-bottom">
+                    Total carbon emission
+                </div>
+
+            </div>
+
+
+
+            <!-- AVERAGE -->
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+                        %
+                    </div>
+
+                    <div>
+
+                        <div class="card-title">
+                            Average Emission
+                        </div>
+
+                        <div class="card-number">
+
+                            {{ average_emission }}
+
+                            <span>
+                                kg
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-bottom">
+                    Average per prediction
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORT DETAILS
+        ================================================= -->
+
+        <section class="report-grid">
+
+
+            <!-- FABRIC -->
+
+            <div class="report-box">
+
+
+                <h2>
+                    🌿 Average Emission by Fabric
+                </h2>
+
+
+                {% if fabrics %}
+
+
+                    {% set max_emission =
+                       fabric_emissions|max %}
+
+
+                    {% for i in range(fabrics|length) %}
+
+
+                        <div class="fabric-row">
+
+
+                            <div class="fabric-name">
+
+                                <span>
+                                    {{ fabrics[i] }}
+                                </span>
+
+                                <span>
+                                    {{ fabric_emissions[i] }} kg
+                                </span>
+
+                            </div>
+
+
+                            <div class="bar">
+
+
+                                {% if max_emission > 0 %}
+
+
+                                    <div
+                                        class="bar-fill"
+                                        style="
+                                        width:
+                                        {{ (fabric_emissions[i]
+                                        / max_emission * 100)|round }}%;
+                                        ">
+                                    </div>
+
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                {% else %}
+
+
+                    <p>
+                        No prediction data available.
+                    </p>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- RESOURCE -->
+
+            <div class="report-box">
+
+
+                <h2>
+                    ⚡ Resource Consumption
+                </h2>
+
+
+                <!-- ELECTRICITY -->
+
+                <div class="resource-item">
+
+
+                    <div class="resource-title">
+
+                        <span>
+                            Electricity
+                        </span>
+
+                        <span>
+                            {{ electricity_total }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="resource-bar">
+
+                        <div
+                            class="resource-fill"
+                            style="width:85%;">
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FUEL -->
+
+                <div class="resource-item">
+
+
+                    <div class="resource-title">
+
+                        <span>
+                            Fuel
+                        </span>
+
+                        <span>
+                            {{ fuel_total }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="resource-bar">
+
+                        <div
+                            class="resource-fill"
+                            style="width:65%;">
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- WATER -->
+
+                <div class="resource-item">
+
+
+                    <div class="resource-title">
+
+                        <span>
+                            Water
+                        </span>
+
+                        <span>
+                            {{ water_total }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="resource-bar">
+
+                        <div
+                            class="resource-fill"
+                            style="width:75%;">
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+function toggleNotifications(){
+
+    const panel =
+        document.getElementById(
+            "notificationPanel"
+        );
+
+    panel.classList.toggle("show");
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const panel =
+            document.getElementById(
+                "notificationPanel"
+            );
+
+        const notification =
+            document.querySelector(
+                ".notification"
+            );
+
+
+        if(
+
+            panel.classList.contains("show") &&
+
+            !panel.contains(event.target) &&
+
+            !notification.contains(event.target)
+
+        ){
+
+            panel.classList.remove("show");
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

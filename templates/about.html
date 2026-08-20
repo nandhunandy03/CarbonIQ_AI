@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Us - CarbonIQ AI</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+    background:#f6faf8;
+    color:#17251f;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:265px;
+    height:100vh;
+
+    background:#075b43;
+
+    color:white;
+
+    padding:25px 12px;
+
+    z-index:1000;
+}
+
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 15px;
+
+    margin-bottom:35px;
+}
+
+.logo-circle{
+
+    width:44px;
+    height:44px;
+
+    border-radius:10px;
+
+    background:#16a96d;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+}
+
+.logo-text{
+
+    font-size:16px;
+    font-weight:700;
+
+    line-height:1.2;
+}
+
+.logo-text span{
+
+    display:block;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-top:4px;
+
+    opacity:.9;
+}
+
+
+/* NAVIGATION */
+
+.nav-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:13px 17px;
+
+    border-radius:9px;
+
+    color:#e5f2ed;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    transition:.2s;
+}
+
+.nav-item:hover{
+
+    background:#087353;
+}
+
+.nav-item.active{
+
+    background:#16a96d;
+
+    color:white;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.10);
+}
+
+.nav-icon{
+
+    width:23px;
+
+    text-align:center;
+
+    font-size:19px;
+}
+
+
+/* LOGOUT */
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    bottom:22px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    margin-left:265px;
+
+    min-height:100vh;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+
+    height:78px;
+
+    background:white;
+
+    border-bottom:1px solid #e7eeea;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+}
+
+.page-title{
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#1c2c25;
+}
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+
+/* SEARCH */
+
+.search-box{
+
+    width:255px;
+
+    height:40px;
+
+    border-radius:22px;
+
+    background:#f3f7f5;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:0 16px;
+}
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:12px;
+}
+
+.search-icon{
+
+    font-size:18px;
+
+    color:#7c8b84;
+}
+
+
+/* NOTIFICATION */
+
+.notification{
+
+    position:relative;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.notification-badge{
+
+    position:absolute;
+
+    top:-6px;
+
+    right:-7px;
+
+    background:#ef4444;
+
+    color:white;
+
+    min-width:17px;
+
+    height:17px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+
+/* USER */
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.user-image{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    background:#e1ebe6;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#075b43;
+
+    font-weight:700;
+}
+
+.user-info strong{
+
+    display:block;
+
+    font-size:13px;
+}
+
+.user-info span{
+
+    display:block;
+
+    font-size:11px;
+
+    color:#8a9791;
+
+    margin-top:3px;
+}
+
+.arrow{
+
+    font-size:10px;
+
+    color:#6e7c75;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+
+    padding:30px 35px 45px;
+}
+
+
+/* =========================
+   HERO ABOUT
+========================= */
+
+.about-hero{
+
+    background:linear-gradient(
+        110deg,
+        #effaf4,
+        #f7fcf9
+    );
+
+    border:1px solid #dcefe4;
+
+    border-radius:18px;
+
+    padding:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    margin-bottom:30px;
+}
+
+.hero-content{
+
+    max-width:620px;
+}
+
+.small-title{
+
+    color:#15965b;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    margin-bottom:12px;
+}
+
+.hero-content h1{
+
+    font-size:36px;
+
+    line-height:1.2;
+
+    color:#123c30;
+
+    margin-bottom:18px;
+}
+
+.hero-line{
+
+    width:65px;
+
+    height:3px;
+
+    background:#15965b;
+
+    border-radius:10px;
+
+    margin-bottom:20px;
+}
+
+.hero-content p{
+
+    color:#65736d;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* HERO VISUAL */
+
+.hero-visual{
+
+    width:310px;
+
+    height:240px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+.globe{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        145deg,
+        #8bd7a9,
+        #269b61
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:75px;
+
+    box-shadow:
+        0 15px 35px rgba(23,130,80,.20);
+}
+
+.float-icon{
+
+    position:absolute;
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    box-shadow:0 7px 20px rgba(0,0,0,.10);
+}
+
+.float-one{
+    top:5px;
+    right:65px;
+}
+
+.float-two{
+    bottom:20px;
+    right:15px;
+}
+
+.float-three{
+    bottom:5px;
+    left:35px;
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:22px;
+}
+
+.section-title h2{
+
+    font-size:22px;
+
+    color:#172b23;
+
+    margin-bottom:8px;
+}
+
+.section-title p{
+
+    color:#78857f;
+
+    font-size:13px;
+}
+
+.title-line{
+
+    width:55px;
+
+    height:3px;
+
+    background:#159b58;
+
+    margin:10px auto 0;
+
+    border-radius:5px;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:35px;
+}
+
+.feature-card{
+
+    background:white;
+
+    border:1px solid #e5ece8;
+
+    border-radius:15px;
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    min-height:210px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.04);
+
+    transition:.2s;
+}
+
+.feature-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+}
+
+.feature-icon{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:#e4f6eb;
+
+    color:#159b58;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0 auto 17px;
+
+    font-size:28px;
+}
+
+.feature-card h3{
+
+    font-size:15px;
+
+    color:#20352b;
+
+    margin-bottom:10px;
+}
+
+.feature-card p{
+
+    color:#74817b;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   TEAM
+========================= */
+
+.team-section{
+
+    margin-top:10px;
+
+    margin-bottom:30px;
+}
+
+.team{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:25px;
+
+    max-width:1000px;
+
+    margin:auto;
+}
+
+.team-card{
+
+    background:white;
+
+    border:1px solid #e4ebe7;
+
+    border-radius:17px;
+
+    padding:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.04);
+
+    transition:.2s;
+}
+
+.team-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+}
+
+
+/* ANIMATED FACE */
+
+.avatar{
+
+    width:145px;
+
+    height:145px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:#e5f5eb;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    border:5px solid #f0f9f3;
+}
+
+
+/*
+   CSS cartoon girl
+*/
+
+.girl{
+
+    position:relative;
+
+    width:88px;
+
+    height:108px;
+}
+
+
+/* hair */
+
+.hair{
+
+    position:absolute;
+
+    width:82px;
+
+    height:86px;
+
+    background:#34251f;
+
+    border-radius:
+        48% 48% 40% 40%;
+
+    left:3px;
+
+    top:3px;
+}
+
+
+/* face */
+
+.face{
+
+    position:absolute;
+
+    width:60px;
+
+    height:70px;
+
+    background:#f6c6b7;
+
+    border-radius:
+        45% 45% 48% 48%;
+
+    left:14px;
+
+    top:25px;
+
+    z-index:2;
+}
+
+
+/* hair front */
+
+.hair-front{
+
+    position:absolute;
+
+    width:65px;
+
+    height:40px;
+
+    background:#34251f;
+
+    border-radius:
+        50% 55% 35% 30%;
+
+    left:12px;
+
+    top:10px;
+
+    z-index:3;
+}
+
+
+/* eyes */
+
+.eye{
+
+    position:absolute;
+
+    width:6px;
+
+    height:8px;
+
+    background:#302522;
+
+    border-radius:50%;
+
+    top:48px;
+
+    z-index:4;
+}
+
+.eye-left{
+    left:29px;
+}
+
+.eye-right{
+    left:51px;
+}
+
+
+/* smile */
+
+.smile{
+
+    position:absolute;
+
+    width:18px;
+
+    height:9px;
+
+    border-bottom:
+        2px solid #8e4d49;
+
+    border-radius:50%;
+
+    left:35px;
+
+    top:67px;
+
+    z-index:4;
+}
+
+
+/* body */
+
+.body{
+
+    position:absolute;
+
+    width:67px;
+
+    height:43px;
+
+    background:#299665;
+
+    border-radius:
+        45px 45px 10px 10px;
+
+    left:11px;
+
+    top:82px;
+
+    z-index:1;
+}
+
+
+/* TEAM INFO */
+
+.team-info{
+
+    flex:1;
+}
+
+.team-info h3{
+
+    font-size:19px;
+
+    color:#1d3028;
+
+    margin-bottom:5px;
+}
+
+.role{
+
+    color:#15965b;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.team-info p{
+
+    color:#6d7a74;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+.member-line{
+
+    width:35px;
+
+    height:2px;
+
+    background:#15965b;
+
+    margin:10px 0 12px;
+}
+
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote{
+
+    margin-top:28px;
+
+    background:#effaf4;
+
+    border:1px solid #dcefe4;
+
+    border-radius:15px;
+
+    padding:22px 30px;
+
+    text-align:center;
+
+    color:#527068;
+
+    font-size:14px;
+
+    font-style:italic;
+}
+
+.quote-symbol{
+
+    font-size:30px;
+
+    color:#159b58;
+
+    margin-bottom:4px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:#89958f;
+
+    font-size:11px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .sidebar{
+        width:220px;
+    }
+
+    .main{
+        margin-left:220px;
+    }
+
+    .features{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .about-hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-line{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .team{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .sidebar{
+        width:70px;
+        padding:20px 8px;
+    }
+
+    .logo{
+        justify-content:center;
+        padding:0;
+    }
+
+    .logo-text{
+        display:none;
+    }
+
+    .nav-item{
+        justify-content:center;
+        padding:13px;
+    }
+
+    .nav-item span:not(.nav-icon){
+        display:none;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+    .user-info,
+    .arrow{
+        display:none;
+    }
+
+    .content{
+        padding:20px 15px;
+    }
+
+    .hero-content h1{
+        font-size:28px;
+    }
+
+    .hero-visual{
+        width:100%;
+    }
+
+    .team-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .member-line{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🌿
+        </div>
+
+        <div class="logo-text">
+
+            Carbon
+
+            <span>
+                Emission Predictor
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="nav-menu">
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            <span class="nav-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="{{ url_for('predict') }}"
+           class="nav-item">
+
+            <span class="nav-icon">□</span>
+
+            <span>Prediction</span>
+
+        </a>
+
+
+        <a href="{{ url_for('history') }}"
+           class="nav-item">
+
+            <span class="nav-icon">◷</span>
+
+            <span>History</span>
+
+        </a>
+
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            <span class="nav-icon">▤</span>
+
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="{{ url_for('about') }}"
+           class="nav-item active">
+
+            <span class="nav-icon">ⓘ</span>
+
+            <span>About Us</span>
+
+        </a>
+
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item">
+
+            <span class="nav-icon">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-item">
+
+            <span class="nav-icon">⇥</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <h1 class="page-title">
+            About Us
+        </h1>
+
+
+        <div class="top-right">
+
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search here..."
+                >
+
+            </div>
+
+
+            <div class="notification">
+
+                ♧
+
+                <span class="notification-badge">
+                    {{ alert_count | default(0) }}
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-image">
+                    TF
+                </div>
+
+                <div class="user-info">
+
+                    <strong>
+                        {{ username |
+                           default("Textile Factory") }}
+                    </strong>
+
+                    <span>
+                        TXT001
+                    </span>
+
+                </div>
+
+                <span class="arrow">
+                    ▼
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+
+        <!-- =========================
+             ABOUT HERO
+        ========================= -->
+
+        <section class="about-hero">
+
+
+            <div class="hero-content">
+
+                <div class="small-title">
+                    ABOUT CARBONIQ AI
+                </div>
+
+
+                <h1>
+                    Building a Greener
+                    Tomorrow with AI
+                </h1>
+
+
+                <div class="hero-line"></div>
+
+
+                <p>
+
+                    CarbonIQ AI is an intelligent carbon
+                    emission prediction platform designed
+                    for textile industries. Our mission is
+                    to help industries monitor, predict and
+                    reduce their carbon footprint using the
+                    power of machine learning and data
+                    analytics.
+
+                </p>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="float-icon float-one">
+                    ☁️
+                </div>
+
+                <div class="globe">
+                    🌍
+                </div>
+
+                <div class="float-icon float-two">
+                    ⚡
+                </div>
+
+                <div class="float-icon float-three">
+                    🌿
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             FEATURES
+        ========================= -->
+
+        <div class="section-title">
+
+            <h2>
+                Our Key Features
+            </h2>
+
+            <p>
+                Smart technology for a sustainable future
+            </p>
+
+            <div class="title-line"></div>
+
+        </div>
+
+
+        <section class="features">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🌿
+                </div>
+
+                <h3>
+                    Smart Prediction
+                </h3>
+
+                <p>
+                    Machine learning models predict
+                    carbon emissions based on real
+                    production data.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Resource Monitoring
+                </h3>
+
+                <p>
+                    Monitor electricity, fuel, water
+                    and machine usage efficiently.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ▥
+                </div>
+
+                <h3>
+                    Detailed Reports
+                </h3>
+
+                <p>
+                    Get detailed insights and visual
+                    reports to analyse emission
+                    performance.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔔
+                </div>
+
+                <h3>
+                    Smart Alerts
+                </h3>
+
+                <p>
+                    Receive alerts when emissions
+                    exceed the safe threshold.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             TEAM
+        ========================= -->
+
+        <section class="team-section">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Meet Our Team
+                </h2>
+
+                <p>
+                    Dedicated students behind CarbonIQ AI
+                </p>
+
+                <div class="title-line"></div>
+
+            </div>
+
+
+            <div class="team">
+
+
+                <!-- BLESSI -->
+
+                <div class="team-card">
+
+
+                    <div class="avatar">
+
+                        <div class="girl">
+
+                            <div class="hair"></div>
+
+                            <div class="face"></div>
+
+                            <div class="hair-front"></div>
+
+                            <div class="eye eye-left"></div>
+
+                            <div class="eye eye-right"></div>
+
+                            <div class="smile"></div>
+
+                            <div class="body"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="team-info">
+
+                        <h3>
+                            Blessi V
+                        </h3>
+
+                        <div class="role">
+                            Student Developer
+                        </div>
+
+                        <div class="member-line"></div>
+
+                        <p>
+                            Worked on machine learning,
+                            carbon emission prediction
+                            and data analytics.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NANDHINI -->
+
+                <div class="team-card">
+
+
+                    <div class="avatar">
+
+                        <div class="girl">
+
+                            <div class="hair"></div>
+
+                            <div class="face"></div>
+
+                            <div class="hair-front"></div>
+
+                            <div class="eye eye-left"></div>
+
+                            <div class="eye eye-right"></div>
+
+                            <div class="smile"></div>
+
+                            <div class="body"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="team-info">
+
+                        <h3>
+                            Nandhini P
+                        </h3>
+
+                        <div class="role">
+                            Student Developer
+                        </div>
+
+                        <div class="member-line"></div>
+
+                        <p>
+                            Worked on user interface,
+                            dashboard design and project
+                            integration.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             QUOTE
+        ========================= -->
+
+        <div class="quote">
+
+            <div class="quote-symbol">
+                “
+            </div>
+
+            Together, we aim to make industries
+            more sustainable and the planet a
+            better place to live.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 CarbonIQ AI -
+        Smart Carbon Emission Prediction System
+
+    </footer>
+
+
+</main>
+
+
+</body>
+
+</html>

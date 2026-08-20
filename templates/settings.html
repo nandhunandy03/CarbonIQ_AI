@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CarbonIQ AI - Settings</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#f6faf8;
+    color:#17251f;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =====================================================
+   SIDEBAR - SAME AS DASHBOARD
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:265px;
+    height:100vh;
+
+    background:#075b43;
+
+    color:white;
+
+    padding:25px 12px;
+
+    z-index:1000;
+
+    box-shadow:4px 0 18px rgba(0,0,0,.06);
+}
+
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 15px;
+
+    margin-bottom:35px;
+}
+
+
+.logo-circle{
+
+    width:44px;
+    height:44px;
+
+    border-radius:10px;
+
+    background:#16a96d;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:23px;
+}
+
+
+.logo-text{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    line-height:1.2;
+}
+
+
+.logo-text span{
+
+    display:block;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-top:4px;
+
+    opacity:.9;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.nav-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:13px 17px;
+
+    border-radius:9px;
+
+    color:#e5f2ed;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+
+.nav-item:hover{
+
+    background:#087353;
+}
+
+
+.nav-item.active{
+
+    background:#16a96d;
+
+    color:white;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.10);
+}
+
+
+.nav-icon{
+
+    width:23px;
+
+    text-align:center;
+
+    font-size:19px;
+}
+
+
+/* LOGOUT */
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    bottom:22px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:265px;
+
+    min-height:100vh;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    height:78px;
+
+    background:white;
+
+    border-bottom:1px solid #e7eeea;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+}
+
+
+.page-title{
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#1c2c25;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+
+    padding:25px 35px 40px;
+}
+
+
+/* =====================================================
+   SETTINGS CARDS
+===================================================== */
+
+.settings-card{
+    background:#fff;
+    border:1px solid #e8efeb;
+    border-radius:13px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+.settings-card h2{
+    font-size:16px;
+    color:#25342c;
+    margin-bottom:16px;
+}
+
+.settings-form{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.settings-form label{
+    font-size:13px;
+    color:#4c5b54;
+    margin-top:10px;
+}
+
+.settings-form input{
+    padding:10px 12px;
+    border:1px solid #dce5e0;
+    border-radius:8px;
+    font-size:14px;
+    outline:none;
+}
+
+.settings-form input:focus{
+    border-color:#16a96d;
+}
+
+.btn-save{
+    margin-top:16px;
+    background:#16a96d;
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    width:fit-content;
+    font-size:13px;
+    font-weight:600;
+}
+
+.btn-save:hover{
+    background:#0f8a58;
+}
+
+.setting-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px solid #f0f4f2;
+}
+
+.setting-row:last-child{
+    border-bottom:none;
+}
+
+.setting-label{
+    font-weight:600;
+    font-size:14px;
+    color:#25342c;
+}
+
+.setting-desc{
+    font-size:12px;
+    color:#8a9791;
+    margin-top:3px;
+}
+
+.setting-select{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid #dce5e0;
+    font-size:13px;
+    background:white;
+}
+
+.btn-secondary{
+    padding:9px 18px;
+    border-radius:8px;
+    border:1px solid #16a96d;
+    color:#16a96d;
+    background:white;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+}
+
+.btn-danger{
+    padding:9px 18px;
+    border-radius:8px;
+    border:1px solid #d9534f;
+    color:#d9534f;
+    background:white;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+}
+
+.flash-message{
+    background:#effaf4;
+    color:#15803d;
+    padding:12px 18px;
+    border-radius:9px;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+
+/* Toggle Switch */
+.switch{
+    position:relative;
+    display:inline-block;
+    width:44px;
+    height:24px;
+    flex-shrink:0;
+}
+
+.switch input{
+    opacity:0;
+    width:0;
+    height:0;
+}
+
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top:0; left:0; right:0; bottom:0;
+    background-color:#ccc;
+    transition:.3s;
+    border-radius:24px;
+}
+
+.slider:before{
+    position:absolute;
+    content:"";
+    height:18px;
+    width:18px;
+    left:3px;
+    bottom:3px;
+    background-color:white;
+    transition:.3s;
+    border-radius:50%;
+}
+
+input:checked + .slider{
+    background-color:#16a96d;
+}
+
+input:checked + .slider:before{
+    transform:translateX(20px);
+}
+
+/* Dark Mode */
+body.dark-mode{
+    background:#121212;
+    color:#eaeaea;
+}
+
+body.dark-mode .topbar{
+    background:#1a1a1a;
+    border-bottom:1px solid #2a2a2a;
+}
+
+body.dark-mode .page-title{
+    color:#eaeaea;
+}
+
+body.dark-mode .settings-card{
+    background:#1e1e1e;
+    border:1px solid #2a2a2a;
+    box-shadow:none;
+}
+
+body.dark-mode .settings-card h2,
+body.dark-mode .setting-label{
+    color:#eaeaea;
+}
+
+body.dark-mode .setting-desc{
+    color:#999;
+}
+
+body.dark-mode .settings-form input,
+body.dark-mode .setting-select{
+    background:#2a2a2a;
+    color:#eaeaea;
+    border:1px solid #3a3a3a;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+    .sidebar{
+        width:220px;
+    }
+
+    .main{
+        margin-left:220px;
+    }
+
+}
+
+
+@media(max-width:750px){
+
+    .sidebar{
+        width:70px;
+        padding:20px 8px;
+    }
+
+    .logo{
+        justify-content:center;
+        padding:0;
+    }
+
+    .logo-text{
+        display:none;
+    }
+
+    .nav-item{
+        justify-content:center;
+        padding:13px;
+    }
+
+    .nav-item span:not(.nav-icon){
+        display:none;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .setting-row{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🌿
+        </div>
+
+        <div class="logo-text">
+
+            Carbon
+
+            <span>
+                Emission Predictor
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="nav-menu">
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('predict') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                □
+            </span>
+
+            <span>
+                Prediction
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('history') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ◷
+            </span>
+
+            <span>
+                History
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ▤
+            </span>
+
+            <span>
+                Reports
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('about') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                i
+            </span>
+
+            <span>
+                About Us
+            </span>
+
+        </a>
+
+
+        <!-- SETTINGS = ACTIVE -->
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item active">
+
+            <span class="nav-icon">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-item">
+
+            <span class="nav-icon">
+                ⇥
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         TOP BAR
+    ================================================= -->
+
+    <header class="topbar">
+
+        <h1 class="page-title">
+            Settings
+        </h1>
+
+    </header>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <div class="content">
+
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash-message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+        <!-- ================= PROFILE SETTINGS ================= -->
+
+        <section class="settings-card">
+
+            <h2>
+                Profile Settings
+            </h2>
+
+            <form class="settings-form"
+                  method="POST"
+                  action="{{ url_for('update_profile') }}">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input type="text"
+                       name="full_name"
+                       value="{{ user_name }}"
+                       required>
+
+                <label>
+                    Email
+                </label>
+
+                <input type="email"
+                       name="email"
+                       value="{{ user_email }}"
+                       required>
+
+                <button type="submit" class="btn-save">
+                    Save Changes
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= APPEARANCE ================= -->
+
+        <section class="settings-card">
+
+            <h2>
+                Appearance
+            </h2>
+
+            <div class="setting-row">
+
+                <div>
+                    <p class="setting-label">
+                        Dark Mode
+                    </p>
+                    <p class="setting-desc">
+                        Switch between light and dark theme
+                    </p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NOTIFICATIONS ================= -->
+
+        <section class="settings-card">
+
+            <h2>
+                Notification Preferences
+            </h2>
+
+            <div class="setting-row">
+
+                <div>
+                    <p class="setting-label">
+                        Prediction Alert Sound
+                    </p>
+                    <p class="setting-desc">
+                        Play audio alert when a new prediction is generated
+                    </p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="alertSoundToggle" checked>
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DATA & REPORTS ================= -->
+
+        <section class="settings-card">
+
+            <h2>
+                Data & Reports
+            </h2>
+
+            <div class="setting-row">
+
+                <div>
+                    <p class="setting-label">
+                        Default Unit
+                    </p>
+                    <p class="setting-desc">
+                        Unit used to display carbon emission values
+                    </p>
+                </div>
+
+                <select id="unitSelect" class="setting-select">
+                    <option value="kg">kg CO₂</option>
+                    <option value="tonnes">Tonnes CO₂</option>
+                </select>
+
+            </div>
+
+            <div class="setting-row">
+
+                <div>
+                    <p class="setting-label">
+                        Export Format
+                    </p>
+                    <p class="setting-desc">
+                        Default format for downloaded reports
+                    </p>
+                </div>
+
+                <select id="exportFormat" class="setting-select">
+                    <option value="pdf">PDF</option>
+                    <option value="excel">Excel</option>
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ACCOUNT ================= -->
+
+        <section class="settings-card">
+
+            <h2>
+                Account
+            </h2>
+
+            <div class="setting-row">
+
+                <div>
+                    <p class="setting-label">
+                        Logout
+                    </p>
+                    <p class="setting-desc">
+                        Sign out of your account
+                    </p>
+                </div>
+
+                <a href="{{ url_for('logout') }}" class="btn-danger">
+                    Logout
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+// Dark Mode Toggle
+const darkToggle = document.getElementById("darkModeToggle");
+
+if(localStorage.getItem("darkMode") === "true"){
+    document.body.classList.add("dark-mode");
+    darkToggle.checked = true;
+}
+
+darkToggle.addEventListener("change", function(){
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", darkToggle.checked);
+});
+
+
+// Alert Sound Toggle
+const alertToggle = document.getElementById("alertSoundToggle");
+
+if(localStorage.getItem("alertSound") === "false"){
+    alertToggle.checked = false;
+}
+
+alertToggle.addEventListener("change", function(){
+    localStorage.setItem("alertSound", alertToggle.checked);
+});
+
+
+// Unit Preference
+const unitSelect = document.getElementById("unitSelect");
+
+if(localStorage.getItem("unit")){
+    unitSelect.value = localStorage.getItem("unit");
+}
+
+unitSelect.addEventListener("change", function(){
+    localStorage.setItem("unit", unitSelect.value);
+});
+
+
+// Export Format Preference
+const exportFormat = document.getElementById("exportFormat");
+
+if(localStorage.getItem("exportFormat")){
+    exportFormat.value = localStorage.getItem("exportFormat");
+}
+
+exportFormat.addEventListener("change", function(){
+    localStorage.setItem("exportFormat", exportFormat.value);
+});
+
+</script>
+
+
+</body>
+
+</html>

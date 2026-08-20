@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>CarbonIQ AI - Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#f5faf7;
+    color:#17251f;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:250px;
+    height:100vh;
+
+    background:#075b43;
+
+    color:white;
+
+    padding:25px 12px;
+
+    z-index:1000;
+}
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 15px;
+
+    margin-bottom:35px;
+}
+
+
+.logo-circle{
+
+    width:44px;
+    height:44px;
+
+    border-radius:11px;
+
+    background:#16a96d;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:23px;
+}
+
+
+.logo-text{
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+.logo-text span{
+
+    display:block;
+
+    font-size:11px;
+
+    font-weight:400;
+
+    margin-top:4px;
+
+    opacity:.85;
+}
+
+
+.nav-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:13px 16px;
+
+    border-radius:9px;
+
+    color:#e4f2ec;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+
+.nav-item:hover{
+
+    background:#087353;
+}
+
+
+.nav-item.active{
+
+    background:#16a96d;
+
+    color:white;
+}
+
+
+.nav-icon{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:18px;
+}
+
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    bottom:22px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:250px;
+
+    min-height:100vh;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    height:75px;
+
+    background:white;
+
+    border-bottom:1px solid #e6eeea;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 32px;
+}
+
+
+.page-title{
+
+    font-size:23px;
+
+    color:#1d3027;
+}
+
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box{
+
+    width:240px;
+
+    height:40px;
+
+    border-radius:22px;
+
+    background:#f3f7f5;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 15px;
+
+    gap:8px;
+}
+
+
+.search-box input{
+
+    border:0;
+
+    outline:0;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:12px;
+}
+
+
+.search-icon{
+
+    font-size:18px;
+
+    color:#718078;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification{
+
+    position:relative;
+
+    cursor:pointer;
+
+    font-size:22px;
+}
+
+
+.notification-badge{
+
+    position:absolute;
+
+    top:-7px;
+
+    right:-8px;
+
+    min-width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:#ef4444;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:9px;
+}
+
+
+/* =====================================================
+   USER
+===================================================== */
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+}
+
+
+.user-image{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#dff0e8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#075b43;
+
+    font-weight:700;
+
+    font-size:12px;
+}
+
+
+.user-info strong{
+
+    display:block;
+
+    font-size:13px;
+}
+
+
+.user-info span{
+
+    display:block;
+
+    font-size:10px;
+
+    color:#89958f;
+
+    margin-top:3px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+
+    padding:25px 32px 40px;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome{
+
+    background:#effaf4;
+
+    border:1px solid #dcefe4;
+
+    border-radius:15px;
+
+    padding:22px 30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+
+.welcome h1{
+
+    color:#075b43;
+
+    font-size:21px;
+
+    margin-bottom:7px;
+}
+
+
+.welcome p{
+
+    color:#718078;
+
+    font-size:12px;
+}
+
+
+.welcome-symbol{
+
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+
+    background:#d8f1e3;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:32px;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:17px;
+
+    margin-bottom:20px;
+}
+
+
+.stat-card{
+
+    background:white;
+
+    border:1px solid #e6eee9;
+
+    border-radius:13px;
+
+    padding:20px;
+
+    min-height:140px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.stat-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+
+.stat-icon{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+}
+
+
+.green{
+
+    background:#e0f6e9;
+
+    color:#12925d;
+}
+
+
+.orange{
+
+    background:#fff0dc;
+
+    color:#e99624;
+}
+
+
+.stat-title{
+
+    font-size:12px;
+
+    color:#6c7973;
+
+    font-weight:600;
+}
+
+
+.stat-number{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-top:5px;
+}
+
+
+.stat-number span{
+
+    font-size:11px;
+
+    color:#738079;
+
+    font-weight:500;
+}
+
+
+.stat-bottom{
+
+    margin-top:15px;
+
+    color:#20a064;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   CHARTS
+===================================================== */
+
+.chart-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.35fr 1fr;
+
+    gap:18px;
+
+    margin-bottom:20px;
+}
+
+
+.chart-card{
+
+    background:white;
+
+    border:1px solid #e6eee9;
+
+    border-radius:13px;
+
+    padding:22px;
+
+    min-height:350px;
+}
+
+
+.chart-card h2{
+
+    font-size:16px;
+
+    color:#26362e;
+
+    margin-bottom:20px;
+}
+
+
+.chart-container{
+
+    height:270px;
+
+    position:relative;
+}
+
+
+.donut-container{
+
+    width:220px;
+
+    height:220px;
+
+    margin:auto;
+}
+
+
+.source-total{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    color:#65736c;
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   BLOCKCHAIN
+===================================================== */
+
+.blockchain-card{
+
+    background:white;
+
+    border:1px solid #dfece5;
+
+    border-radius:15px;
+
+    padding:24px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.025);
+}
+
+
+.blockchain-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+
+.blockchain-top h2{
+
+    color:#075b43;
+
+    font-size:18px;
+
+    margin-bottom:6px;
+}
+
+
+.blockchain-top p{
+
+    color:#718078;
+
+    font-size:11px;
+}
+
+
+.blockchain-status{
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+
+.verified{
+
+    background:#dcf7e8;
+
+    color:#118451;
+}
+
+
+.failed{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+}
+
+
+.blockchain-info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+
+    margin-bottom:18px;
+}
+
+
+.blockchain-item{
+
+    background:#f6fbf8;
+
+    border:1px solid #e5eee9;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+
+.blockchain-icon{
+
+    width:40px;
+    height:40px;
+
+    flex-shrink:0;
+
+    border-radius:9px;
+
+    background:#e1f5e9;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+}
+
+
+.blockchain-item strong{
+
+    display:block;
+
+    color:#174c39;
+
+    font-size:11px;
+
+    margin-bottom:5px;
+}
+
+
+.blockchain-item span{
+
+    color:#7b8882;
+
+    font-size:9px;
+
+    line-height:1.5;
+}
+
+
+.blockchain-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#effaf4;
+
+    padding:13px 15px;
+
+    border-radius:9px;
+
+    margin-bottom:10px;
+}
+
+
+.blockchain-footer span{
+
+    color:#718078;
+
+    font-size:10px;
+}
+
+
+.blockchain-footer strong{
+
+    color:#075b43;
+
+    font-size:11px;
+}
+
+
+.blockchain-hash{
+
+    background:#f4f7f5;
+
+    padding:12px 15px;
+
+    border-radius:8px;
+}
+
+
+.blockchain-hash span{
+
+    display:block;
+
+    color:#718078;
+
+    font-size:9px;
+
+    margin-bottom:6px;
+}
+
+
+.blockchain-hash code{
+
+    color:#075b43;
+
+    font-size:9px;
+
+    word-break:break-all;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-card{
+
+    background:white;
+
+    border:1px solid #e5ece8;
+
+    border-radius:13px;
+
+    padding:24px;
+
+}
+
+
+.about-card h2{
+
+    color:#075b43;
+
+    font-size:17px;
+
+    margin-bottom:8px;
+}
+
+
+.about-card p{
+
+    color:#718078;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
+
+.notification-panel{
+
+    position:fixed;
+
+    top:70px;
+
+    right:30px;
+
+    width:300px;
+
+    background:white;
+
+    border:1px solid #e3ebe7;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.15);
+
+    display:none;
+
+    z-index:2000;
+}
+
+
+.notification-panel.show{
+
+    display:block;
+}
+
+
+.notification-panel h3{
+
+    color:#18372a;
+
+    font-size:15px;
+
+    margin-bottom:12px;
+}
+
+
+.alert{
+
+    background:#fff3f3;
+
+    color:#b42323;
+
+    padding:13px;
+
+    border-radius:8px;
+
+    font-size:11px;
+
+    line-height:1.5;
+}
+
+
+.safe{
+
+    background:#effaf4;
+
+    color:#15803d;
+
+    padding:13px;
+
+    border-radius:8px;
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+    .sidebar{
+
+        width:220px;
+    }
+
+    .main{
+
+        margin-left:220px;
+    }
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .chart-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:750px){
+
+    .sidebar{
+
+        width:70px;
+
+        padding:20px 8px;
+    }
+
+    .logo{
+
+        justify-content:center;
+
+        padding:0;
+    }
+
+    .logo-text{
+
+        display:none;
+    }
+
+    .nav-item{
+
+        justify-content:center;
+
+        padding:13px;
+    }
+
+    .nav-item span:not(.nav-icon){
+
+        display:none;
+    }
+
+    .main{
+
+        margin-left:70px;
+    }
+
+    .topbar{
+
+        padding:0 15px;
+    }
+
+    .search-box{
+
+        display:none;
+    }
+
+    .user-info{
+
+        display:none;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .stats{
+
+        grid-template-columns:1fr;
+    }
+
+    .welcome-symbol{
+
+        display:none;
+    }
+
+    .blockchain-info{
+
+        grid-template-columns:1fr;
+    }
+
+    .blockchain-top{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🌿
+        </div>
+
+        <div class="logo-text">
+
+            CarbonIQ AI
+
+            <span>
+                Carbon Emission Predictor
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="nav-menu">
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item active">
+
+            <span class="nav-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="{{ url_for('predict') }}"
+           class="nav-item">
+
+            <span class="nav-icon">□</span>
+
+            <span>Prediction</span>
+
+        </a>
+
+
+        <a href="{{ url_for('history') }}"
+           class="nav-item">
+
+            <span class="nav-icon">◷</span>
+
+            <span>History</span>
+
+        </a>
+
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            <span class="nav-icon">▤</span>
+
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="{{ url_for('about') }}"
+           class="nav-item">
+
+            <span class="nav-icon">ⓘ</span>
+
+            <span>About Us</span>
+
+        </a>
+
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item">
+
+            <span class="nav-icon">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-item">
+
+            <span class="nav-icon">⇥</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <h1 class="page-title">
+        Dashboard
+    </h1>
+
+
+    <div class="top-right">
+
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="text"
+                placeholder="Search here..."
+            >
+
+        </div>
+
+
+        <div class="notification"
+             onclick="toggleNotifications()">
+
+            ♧
+
+            <span class="notification-badge">
+                {{ alert_count }}
+            </span>
+
+        </div>
+
+
+        <div class="user-profile">
+
+            <div class="user-image">
+
+                {{ username[:2]|upper }}
+
+            </div>
+
+            <div class="user-info">
+
+                <strong>
+                    {{ username }}
+                </strong>
+
+                <span>
+                    CarbonIQ User
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     NOTIFICATION
+===================================================== -->
+
+<div id="notificationPanel"
+     class="notification-panel">
+
+    <h3>
+        Notifications
+    </h3>
+
+
+    {% if alert_count > 0 %}
+
+        <div class="alert">
+
+            <strong>
+                HIGH CARBON ALERT
+            </strong>
+
+            <br><br>
+
+            {{ alert_count }}
+            high-emission prediction(s)
+            detected.
+
+        </div>
+
+    {% else %}
+
+        <div class="safe">
+
+            ✓ No new alerts.
+
+            <br><br>
+
+            Your recorded emission levels
+            are within the current limit.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+
+<div class="content">
+
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<section class="welcome">
+
+    <div>
+
+        <h1>
+            Welcome back, {{ username }}!
+        </h1>
+
+        <p>
+            Here's your factory overview
+            and carbon insights.
+        </p>
+
+    </div>
+
+
+    <div class="welcome-symbol">
+        🌿
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATISTICS
+===================================================== -->
+
+<section class="stats">
+
+
+    <div class="stat-card">
+
+        <div class="stat-header">
+
+            <div class="stat-icon green">
+                ◉
+            </div>
+
+            <div>
+
+                <div class="stat-title">
+                    Total Predictions
+                </div>
+
+                <div class="stat-number">
+                    {{ total_predictions }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="stat-bottom">
+            Prediction records
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-header">
+
+            <div class="stat-icon green">
+                🌿
+            </div>
+
+            <div>
+
+                <div class="stat-title">
+                    Total CO₂ Emission
+                </div>
+
+                <div class="stat-number">
+
+                    {{ total_emission }}
+
+                    <span>
+                        kg
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="stat-bottom">
+            Total recorded emission
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-header">
+
+            <div class="stat-icon orange">
+                %
+            </div>
+
+            <div>
+
+                <div class="stat-title">
+                    Carbon Score
+                </div>
+
+                <div class="stat-number">
+
+                    {{ carbon_score }}
+
+                    <span>
+                        /100
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="stat-bottom">
+
+            {% if carbon_score >= 80 %}
+
+                <b style="color:#15965b;">
+                    Good
+                </b>
+
+            {% elif carbon_score >= 60 %}
+
+                <b style="color:#e99624;">
+                    Moderate
+                </b>
+
+            {% else %}
+
+                <b style="color:#dc2626;">
+                    Needs Improvement
+                </b>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-header">
+
+            <div class="stat-icon orange">
+                +
+            </div>
+
+            <div>
+
+                <div class="stat-title">
+                    Energy Optimized
+                </div>
+
+                <div class="stat-number">
+
+                    {{ energy_optimized }}%
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="stat-bottom">
+            Resource efficiency
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CHARTS
+===================================================== -->
+
+<section class="chart-grid">
+
+
+    <!-- CO2 TREND -->
+
+    <div class="chart-card">
+
+        <h2>
+            CO₂ Emission Trend
+        </h2>
+
+        <div class="chart-container">
+
+            <canvas id="emissionChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SOURCE -->
+
+    <div class="chart-card">
+
+        <h2>
+            Emission by Source
+        </h2>
+
+        <div class="donut-container">
+
+            <canvas id="sourceChart"></canvas>
+
+        </div>
+
+        <div class="source-total">
+
+            Electricity:
+            {{ electricity_total }} |
+
+            Fuel:
+            {{ fuel_total }} |
+
+            Water:
+            {{ water_total }}
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     BLOCKCHAIN VERIFICATION
+===================================================== -->
+
+<section class="blockchain-card">
+
+    <div class="blockchain-top">
+
+        <div>
+            <h2>🔗 Blockchain Verification</h2>
+
+            <p>
+                Your carbon prediction records are securely
+                recorded and verified using blockchain technology.
+            </p>
+        </div>
+
+        <button
+            class="blockchain-status"
+            onclick="showBlockchainDetails('status')">
+
+            ✓ {{ blockchain_status }}
+
+        </button>
+
+    </div>
+
+
+    <div class="blockchain-info">
+
+
+        <!-- SECURE RECORDS -->
+
+        <div class="blockchain-item clickable"
+             onclick="showBlockchainDetails('secure')">
+
+            <span class="blockchain-icon">
+                🔐
+            </span>
+
+            <div>
+
+                <strong>
+                    Secure Records
+                </strong>
+
+                <span>
+                    Prediction data is protected from modification.
+                </span>
+
+            </div>
+
+            <span class="open-arrow">›</span>
+
+        </div>
+
+
+        <!-- BLOCKCHAIN BLOCKS -->
+
+        <div class="blockchain-item clickable"
+             onclick="showBlockchainDetails('blocks')">
+
+            <span class="blockchain-icon">
+                ⛓️
+            </span>
+
+            <div>
+
+                <strong>
+                    Blockchain Blocks
+                </strong>
+
+                <span>
+                    {{ blockchain_blocks }}
+                    prediction record(s) verified.
+                </span>
+
+            </div>
+
+            <span class="open-arrow">›</span>
+
+        </div>
+
+
+        <!-- DATA INTEGRITY -->
+
+        <div class="blockchain-item clickable"
+             onclick="showBlockchainDetails('integrity')">
+
+            <span class="blockchain-icon">
+                ✓
+            </span>
+
+            <div>
+
+                <strong>
+                    Data Integrity
+                </strong>
+
+                <span>
+                    All stored prediction records are verified.
+                </span>
+
+            </div>
+
+            <span class="open-arrow">›</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- LATEST STATUS -->
+
+    <div class="blockchain-footer clickable"
+         onclick="showBlockchainDetails('hash')">
+
+        <div>
+            <span>
+                Latest Blockchain Status
+            </span>
+
+            <strong>
+                {{ blockchain_status }}
+            </strong>
+        </div>
+
+        <span class="open-arrow">
+            ›
+        </span>
+
+    </div>
+
+
+    <!-- HASH -->
+
+    <div class="hash-box clickable"
+         onclick="showBlockchainDetails('hash')">
+
+        <span>
+            Latest Block Hash
+        </span>
+
+        <code>
+            {{ latest_hash }}
+        </code>
+
+        <span class="hash-arrow">
+            View Details ›
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BLOCKCHAIN POPUP
+===================================================== -->
+
+<div id="blockchainModal"
+     class="blockchain-modal">
+
+    <div class="blockchain-modal-content">
+
+        <button class="close-modal"
+                onclick="closeBlockchainDetails()">
+            ×
+        </button>
+
+        <div id="blockchainModalBody">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+<script>
+
+function toggleNotifications(){
+
+    const panel =
+        document.getElementById("notificationPanel");
+
+    panel.classList.toggle("show");
+}
+
+
+/* ================================
+   BLOCKCHAIN DETAILS
+================================ */
+
+function showBlockchainDetails(type){
+
+    const modal =
+        document.getElementById("blockchainModal");
+
+    const body =
+        document.getElementById("blockchainModalBody");
+
+    modal.classList.add("show");
+
+    if(type === "secure"){
+
+        body.innerHTML = `
+            <h2>🔐 Secure Records</h2>
+            <p>
+                Your prediction records are securely stored
+                and protected from unauthorized modification.
+            </p>
+        `;
+
+    }
+
+    else if(type === "blocks"){
+
+        body.innerHTML = `
+            <h2>⛓️ Blockchain Blocks</h2>
+            <p>
+                {{ blockchain_blocks }} prediction records
+                have been verified through blockchain.
+            </p>
+        `;
+
+    }
+
+    else if(type === "integrity"){
+
+        body.innerHTML = `
+            <h2>✓ Data Integrity</h2>
+            <p>
+                All stored prediction records have been
+                successfully verified.
+            </p>
+        `;
+
+    }
+
+    else if(type === "status"){
+
+        body.innerHTML = `
+            <h2>🔗 Blockchain Status</h2>
+            <p>
+                Current Status:
+                <strong>{{ blockchain_status }}</strong>
+            </p>
+        `;
+
+    }
+
+    else if(type === "hash"){
+
+        body.innerHTML = `
+            <h2>🔐 Latest Block Hash</h2>
+            <p>
+                This is the hash of the latest verified
+                blockchain block.
+            </p>
+
+            <code>
+                {{ latest_hash }}
+            </code>
+        `;
+    }
+}
+
+
+function closeBlockchainDetails(){
+
+    document
+        .getElementById("blockchainModal")
+        .classList.remove("show");
+
+}
+
+</script>
+
+<script>
+/* =====================================================
+   EMISSION CHART
+===================================================== */
+
+
+const predictionLabels =
+    {{ prediction_labels | tojson }};
+
+
+const emissionValues =
+    {{ emission_values | tojson }};
+
+
+new Chart(
+
+    document.getElementById(
+        "emissionChart"
+    ),
+
+    {
+
+        type:"line",
+
+        data:{
+
+            labels:
+                predictionLabels,
+
+            datasets:[{
+
+                label:
+                    "CO₂ Emission",
+
+                data:
+                    emissionValues,
+
+                borderColor:
+                    "#159b58",
+
+                backgroundColor:
+                    "rgba(21,155,88,0.08)",
+
+                borderWidth:3,
+
+                pointRadius:4,
+
+                tension:.35,
+
+                fill:true
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+                    display:false
+                }
+
+            },
+
+            scales:{
+
+                y:{
+
+                    beginAtZero:true,
+
+                    title:{
+
+                        display:true,
+
+                        text:"kg CO₂"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+</script>
+
+
+
+<script>
+
+new Chart(
+
+    document.getElementById(
+        "sourceChart"
+    ),
+
+    {
+
+        type:"doughnut",
+
+        data:{
+
+            labels:[
+
+                "Electricity",
+
+                "Fuel",
+
+                "Water"
+
+            ],
+
+            datasets:[{
+
+                data:[
+
+                    {{ electricity_total }},
+
+                    {{ fuel_total }},
+
+                    {{ water_total }}
+
+                ],
+
+                backgroundColor:[
+
+                    "#168dcc",
+
+                    "#22a65d",
+
+                    "#b8c0c5"
+
+                ],
+
+                borderWidth:0,
+
+                cutout:"65%"
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+
+                    position:"bottom",
+
+                    labels:{
+
+                        font:{
+                            size:10
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
