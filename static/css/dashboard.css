@@ -1,0 +1,284 @@
+/* =====================================================
+   BLOCKCHAIN CLICKABLE ITEMS
+===================================================== */
+
+.clickable{
+    cursor:pointer;
+    transition:all .2s ease;
+}
+
+.clickable:hover{
+    transform:translateY(-2px);
+    border-color:#16a96d;
+    box-shadow:0 5px 15px rgba(7,91,67,.10);
+}
+
+.open-arrow{
+    margin-left:auto;
+    color:#16a96d !important;
+    font-size:20px !important;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   BLOCKCHAIN HASH BOX
+===================================================== */
+
+.hash-box{
+
+    background:#f4f7f5;
+
+    padding:14px 15px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.hash-box:hover{
+
+    background:#eaf7f0;
+
+    border-color:#16a96d;
+
+}
+
+
+.hash-box > span:first-child{
+
+    display:block;
+
+    color:#718078;
+
+    font-size:9px;
+
+    margin-bottom:6px;
+
+}
+
+
+.hash-box code{
+
+    display:block;
+
+    color:#075b43;
+
+    font-size:9px;
+
+    word-break:break-all;
+
+}
+
+
+.hash-arrow{
+
+    display:block;
+
+    text-align:right;
+
+    color:#16a96d !important;
+
+    font-size:10px !important;
+
+    margin-top:8px;
+
+}
+
+
+/* =====================================================
+   BLOCKCHAIN MODAL
+===================================================== */
+
+.blockchain-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:5000;
+
+    padding:20px;
+
+}
+
+
+.blockchain-modal.show{
+
+    display:flex;
+
+}
+
+
+/* =====================================================
+   MODAL CONTENT
+===================================================== */
+
+.blockchain-modal-content{
+
+    width:450px;
+
+    max-width:100%;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:28px;
+
+    position:relative;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+    animation:modalOpen .2s ease;
+
+}
+
+
+@keyframes modalOpen{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-modal{
+
+    position:absolute;
+
+    top:12px;
+
+    right:15px;
+
+    width:32px;
+
+    height:32px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#eff7f3;
+
+    color:#075b43;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.close-modal:hover{
+
+    background:#d9f1e4;
+
+}
+
+
+/* =====================================================
+   MODAL TEXT
+===================================================== */
+
+#blockchainModalBody h2{
+
+    color:#075b43;
+
+    font-size:20px;
+
+    margin-bottom:14px;
+
+}
+
+
+#blockchainModalBody p{
+
+    color:#66756e;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+}
+
+
+#blockchainModalBody strong{
+
+    color:#075b43;
+
+}
+
+
+#blockchainModalBody code{
+
+    display:block;
+
+    margin-top:15px;
+
+    padding:14px;
+
+    background:#f4f7f5;
+
+    border-radius:8px;
+
+    color:#075b43;
+
+    font-size:10px;
+
+    word-break:break-all;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .blockchain-modal-content{
+
+        width:95%;
+
+        padding:22px;
+
+    }
+
+}
